@@ -8,6 +8,9 @@ class City:
         self.lat = lat
         self.lon = lon
 
+    def __repr__(self):
+        return str(self)
+
 
 # We have a collection of US cities with population over 750,000 stored in the
 # file "cities.csv". (CSV stands for "comma-separated values".)
@@ -28,17 +31,20 @@ def cityreader(cities=[]):
     # TODO Implement the functionality to read from the 'cities.csv' file
     # For each city record, create a new City instance and add it to the
     # `cities` list
-    f = open("cities.csv", "r")
+    f = open("/Users/dxtrlws/Lambda/Computer Science/Python/sprint/Sprint-Challenge--Intro-Python/src/cityreader/cities.csv", "r")
     for city in f:
-        cities.append(city)
-    return cities
+        city_name = city.split(',')
+        new_city = City(city_name[0].strip(), city_name[3].strip(), city_name[4].strip())
+        cities.append(new_city)
+    return(cities)
 
 
 cityreader(cities)
-
 # Print the list of cities (name, lat, lon), 1 record per line.
-for c in cities:
-    print(c)
+itercities = iter(cities)
+next(itercities)
+for c in itercities:
+    print('City(' +'"' + c.name + '"'  + ', ' + c.lat + ',' + c.lon + ')')
 
 # STRETCH GOAL!
 #
