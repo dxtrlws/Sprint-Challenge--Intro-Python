@@ -32,9 +32,11 @@ def cityreader(cities=[]):
     # For each city record, create a new City instance and add it to the
     # `cities` list
     f = open("/Users/dxtrlws/Lambda/Computer Science/Python/sprint/Sprint-Challenge--Intro-Python/src/cityreader/cities.csv", "r")
-    for city in f:
+    internum = iter(f)
+    next(internum)
+    for city in internum:
         city_name = city.split(',')
-        new_city = City(city_name[0].strip(), city_name[3].strip(), city_name[4].strip())
+        new_city = City(city_name[0].strip(), float(city_name[3]), float(city_name[4]))
         cities.append(new_city)
     return(cities)
 
@@ -44,7 +46,8 @@ cityreader(cities)
 itercities = iter(cities)
 next(itercities)
 for c in itercities:
-    print('City(' +'"' + c.name + '"'  + ', ' + c.lat + ',' + c.lon + ')')
+    # print('City(' +'"' + c.name + '"'  + ', ' + c.lat + ',' + c.lon + ')')
+    print('City("{}", {},{})'.format("string", c.lat, c.lon))
 
 # STRETCH GOAL!
 #
